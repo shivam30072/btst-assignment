@@ -2,6 +2,9 @@ const asyncHandler = require("express-async-handler");
 const Task = require("../model/taskModel");
 const User = require("../model/userModel");
 
+/* 
+req - POST
+*/
 const createTask = asyncHandler(async (req, res) => {
   const { title, desc } = req.body;
 
@@ -28,6 +31,9 @@ const createTask = asyncHandler(async (req, res) => {
   res.status(400).json({ message: "Server Error" });
 });
 
+/* 
+req - GET
+*/
 const getAllTask = asyncHandler(async (req, res) => {
   const userId = req.user.id;
   if (!userId) {
@@ -38,6 +44,9 @@ const getAllTask = asyncHandler(async (req, res) => {
   res.status(200).json({ allTasks, count: allTasks.length });
 });
 
+/* 
+req - PATCH
+*/
 const updateTask = asyncHandler(async (req, res) => {
   const taskId = req.params.id;
   const userId = req.user.id;
@@ -71,6 +80,9 @@ const updateTask = asyncHandler(async (req, res) => {
   }
 });
 
+/* 
+req - DELETE
+*/
 const deleteTask = asyncHandler(async (req, res) => {
   const taskId = req.params.id;
   const userId = req.user.id;
